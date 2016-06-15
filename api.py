@@ -43,6 +43,7 @@ class Zodiac(object):
             company=self.company
         )
         body = self._post(url, {'filename':filename})
+        print body
         return body['url']
 
 
@@ -50,11 +51,11 @@ class Zodiac(object):
         filename = filepath.split('/')[-1]
         upload_url = self._create_upload_location(filename)
         self._put(upload_url, filepath, filename)
-        s3path = upload_url.lstrip('https://raw-datasets.s3.amazonaws.com/').split('?')[0]
+        s3_path = upload_url.lstrip('https://raw-datasets.storage.googleapis.com').split('?')[0]
         url = self._format_url('{api}/{version}/{company}/datasets/create', company=self.company)
         self._post(
             url,
-            {'description': description, 'filename': filename, 's3_path': s3path}
+            {'description': description, 'filename': filename, 's3_path': s3_path}
         )
 
 
