@@ -24,6 +24,8 @@ See example usage from the command line via:
 In a python application import 
 `api.Zodiac` 
 
-Instantiate it with your credentials (username, password).  On the instance call `list_datasets` to see your available files, and then get the download link by calling `get_download_url` providing it with the filename.  
+Instantiate it with your credentials (username, password).  On the instance call `list_datasets` to see your available files. 
+
+To retrieve a file, get the download link by calling `get_download_url` providing the method with the filename.  
 
 
