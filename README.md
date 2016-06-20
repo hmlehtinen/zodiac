@@ -34,6 +34,13 @@ To retrieve a file, get the download link by calling `get_download_url` providin
 import requests
 import api
 
+conn = api.Zodiac('user@company.com', 'my_password')
+print conn.list_datasets() # see a list of available files for download
+url = conn.get_download_url('results.csv')
+
+# This is a way to download the file from the url using the requests module
+# The file can be downloaded by any other means such as curl, wget, etc.
+
 def download_file(url, local_filename):
     '''See http://docs.python-requests.org/en/latest/user/advanced/#body-content-workflow '''
     r = requests.get(url, stream=True)
@@ -42,12 +49,6 @@ def download_file(url, local_filename):
             if chunk:
                 f.write(chunk)
 
-conn = api.Zodiac('user@company.com', 'my_password')
-print conn.list_datasets() # see a list of available files for download
-url = conn.get_download_url('results.csv')
-
-# This is a way to download the file from the url using the requests module
-# The file can be downloaded by any other means such as curl, wget, etc.
 download_file(url, 'local_result.csv')
 ```
 
