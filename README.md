@@ -17,3 +17,13 @@ Example:
 See example usage from the command line via:
 
    `python zodiac.py`
+
+
+## Data Download
+
+In a python application import 
+`api.Zodiac` 
+
+Instantiate it with your credentials (username, password).  On the instance call `list_datasets` to see your available files, and then get the download link by calling `get_download_url` providing it with the filename.  
+
+
