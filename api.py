@@ -59,6 +59,23 @@ class Zodiac(object):
         )
 
 
+    def submit_job(self, args):
+        txlogs = []
+        attrfiles = []
+        for trans_log in args.transactions:
+            txlogs.append(self.upload_file(trans_log, trans_log))
+        for attr_file in args.attributes:
+            attrfiles.append(self.upload_file(attr_file, attr_file))
+        url = self._format_url(
+            '{api}/{version}/{company}/models/{model_group_hash}/execute',
+            company=self.company, model_group_hash=args.model_group_hash
+        )
+        self._post(
+            url,
+            {'transaction_logs': trans_log, 'attributes': attrfiles}
+        )
+
+
     def _list_datasets(self):
         url = self._format_url('{api}/{version}/{company}/datasets/list', company=self.company)
         return json.loads(self._get(url).text)
