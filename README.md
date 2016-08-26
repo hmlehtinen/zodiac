@@ -19,6 +19,10 @@ See example usage from the command line via:
    `python zodiac.py`
 
 
+## Job Run
+Upload files via:
+ `zodiac-job.py -m HASH_PROVIDED_BY_ZODIAC -u USERNAME -p PASSWORD -t TRANSACTION_LOG_FILE -a ATTRIBUTES_FILE`
+
 ## Data Download
 
 In a python application import
@@ -51,4 +55,3 @@ def download_file(url, local_filename):
 
 download_file(url, 'local_result.csv')
 ```
-
