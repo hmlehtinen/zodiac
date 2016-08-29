@@ -1,18 +1,19 @@
 import json
 import requests
 
-API = 'https://dashboard.zodiacmetrics.com/api'
-API_VERSION = 'v1'
-
-
 class Zodiac(object):
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, company=None, api=None, api_version=None):
+
+        self.api = api or 'https://dashboard.zodiacmetrics.com/api'
+        self.api_version = api_version or 'v1'
+
         self.login_as(username, password)
+        self.company = company or self.company
 
     def _format_url(self, url, **kwargs):
-        kwargs['api'] = API
-        kwargs['version'] = API_VERSION
+        kwargs['api'] = self.api
+        kwargs['version'] = self.api_version
         return url.format(**kwargs)
 
     def _post(self, url, values):
@@ -26,6 +27,7 @@ class Zodiac(object):
         }
         with open(filepath, 'rb') as data:
             resp = self.session.put(url, data=data, headers=headers)
+        return resp
 
     def _get(self, url):
         return self.session.get(url)
@@ -43,7 +45,6 @@ class Zodiac(object):
             company=self.company
         )
         body = self._post(url, {'filename':filename})
-        print body
         return body['url']
 
 
@@ -53,9 +54,27 @@ class Zodiac(object):
         self._put(upload_url, filepath, filename)
         s3_path = upload_url.lstrip('https://raw-datasets.storage.googleapis.com').split('?')[0]
         url = self._format_url('{api}/{version}/{company}/datasets/create', company=self.company)
-        self._post(
+        resp = self._post(
             url,
             {'description': description, 'filename': filename, 's3_path': s3_path}
+        )
+        return s3_path
+
+
+    def submit_job(self, args):
+        txlogs = []
+        attrfiles = []
+        for trans_log in args.transactions:
+            txlogs.append(self.upload_file(trans_log, trans_log))
+        for attr_file in args.attributes or []:
+            attrfiles.append(self.upload_file(attr_file, attr_file))
+        url = self._format_url(
+            '{api}/{version}/{company}/models/{model_group_hash}/execute',
+            company=self.company, model_group_hash=args.model_group_hash
+        )
+        self._post(
+            url,
+            {'transaction_logs': txlogs, 'attributes': attrfiles}
         )
 
 
