@@ -1,6 +1,8 @@
 # Python-client
 A python client to connect to Zodiac for data services.
 
+## Installation
+
 Install Python dependencies with
 ` pip install -r requirements.txt`
 
@@ -31,7 +33,9 @@ See example usage from the command line via:
 `python zodiac-job.py --help`
 
 **Notes:**
+
 1. Transaction logs are considered append-only and the job processor will keep only new transactions since the last job run.
+
 2. Attribute files must be _complete for the entire customer base_. Customers missing from the uploaded attributes files that appear in the full transaction log (including previous uploads) will be assumed to have missing values for all attributes.
 
 ## Data Download
