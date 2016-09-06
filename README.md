@@ -36,7 +36,10 @@ See example usage from the command line via:
 
 1. Transaction logs are considered append-only and the job processor will keep only new transactions since the last job run.
 
-2. Attribute files must be _complete for the entire customer base_. Customers missing from the uploaded attributes files that appear in the full transaction log (including previous uploads) will be assumed to have missing values for all attributes.
+1. Attribute files must be _complete for the entire customer base_. Customers missing from the uploaded attributes files that appear in the full transaction log (including previous uploads) will be assumed to have missing values for all attributes.
+
+
+1. Transaction log and attribute headers are expected to conform to those provided in the initial client onboarding. If you'd like to have the schemas updated, please contact your client success representative.
 
 ## Data Download
 
