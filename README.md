@@ -4,7 +4,7 @@ A python client to connect to Zodiac for data services.
 Install Python dependencies with
 ` pip install -r requirements.txt`
 
-## Data Upload
+## Pilot Data Upload
 
 Upload files via:
 
@@ -19,9 +19,16 @@ See example usage from the command line via:
    `python zodiac.py`
 
 
-## Job Run
+## Data Upload for Job Run
+
+For clients using continuous programmatic upload, please use this option.
+
 Upload files via:
  `zodiac-job.py -m HASH_PROVIDED_BY_ZODIAC -u USERNAME -p PASSWORD -t TRANSACTION_LOG_FILE -a ATTRIBUTES_FILE`
+
+See example usage from the command line via:
+
+`python zodiac-job.py --help`
 
 ## Data Download
 

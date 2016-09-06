@@ -58,7 +58,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--api',
         dest="api",
-        help="The Zodiac API to use",
+        help="The Zodiac API to use. Not required for most clients.",
         required=False,
         default=None
     )
