@@ -1,5 +1,6 @@
 import json
 import requests
+from urlparse import urlparse
 
 class Zodiac(object):
 
@@ -52,7 +53,7 @@ class Zodiac(object):
         filename = filepath.split('/')[-1]
         upload_url = self._create_upload_location(filename)
         self._put(upload_url, filepath, filename)
-        s3_path = upload_url.lstrip('https://raw-datasets.storage.googleapis.com').split('?')[0]
+        s3_path = urlparse(upload_url).path
         url = self._format_url('{api}/{version}/{company}/datasets/create', company=self.company)
         resp = self._post(
             url,
