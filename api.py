@@ -86,6 +86,23 @@ class Zodiac(object):
         data = self._list_datasets()
         return [d['filename'] for d in data]
 
+    def get_latest_output(self, args):
+        mgh = args.model_group_hash
+        url = self._format_url(
+            '{api}/{version}/{company}/datasets/{mgh}/modeling_output',
+            company=self.company,
+            mgh=mgh
+        )
+        filename = json.loads(self._get(url).text)['filename']
+        resp = self._get(
+            self._format_url(
+                "{api}/{version}/{company}/datasets/{inst}/download_url",
+                company=self.company,
+                inst=filename)
+        )
+        return json.loads(resp.text)['url']
+
+
     def get_download_url(self, filename):
         datasets = self._list_datasets()
         inst = [d['id'] for d in datasets if d['filename'] == filename][-1]
