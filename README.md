@@ -37,6 +37,16 @@ See example usage from the command line via:
 
 `python zodiac-job.py --help`
 
+**Notes:**
+
+1. Transaction logs are considered append-only and the job processor will keep only new transactions since the last job run.
+
+1. Attribute files must be _complete for the entire customer base_. Customers missing from the uploaded attributes files that appear in the full transaction log (including previous uploads) will be assumed to have missing values for all attributes.
+
+
+1. Transaction log and attribute headers are expected to conform to those provided in the initial client onboarding. If you'd like to have the schemas updated, please contact your client success representative.
+
+
 ## Upload Emails
 
 For clients using emails, please use this option.
@@ -46,15 +56,8 @@ Upload files via:
 
 See example usage from the command line via:
 
-`python zodiac-job.py --help`
-**Notes:**
+`python zodiac-email.py --help`
 
-1. Transaction logs are considered append-only and the job processor will keep only new transactions since the last job run.
-
-1. Attribute files must be _complete for the entire customer base_. Customers missing from the uploaded attributes files that appear in the full transaction log (including previous uploads) will be assumed to have missing values for all attributes.
-
-
-1. Transaction log and attribute headers are expected to conform to those provided in the initial client onboarding. If you'd like to have the schemas updated, please contact your client success representative.
 
 ## Data Download
 
