@@ -51,7 +51,7 @@ See example usage from the command line via:
 For clients using emails, please use this option.
 
 Upload files via:
- `zodiac-emails.py -u USERNAME -p PASSWORD -e EMAIL_FILE -a ATTRIBUTES_FILE -c COMPANY_MASK`
+ `zodiac-emails.py -u USERNAME -p PASSWORD -e EMAIL_FILE -c COMPANY_MASK`
 
 See example usage from the command line via:
 
