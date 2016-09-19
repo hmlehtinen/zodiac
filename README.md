@@ -59,16 +59,30 @@ See example usage from the command line via:
 `python zodiac-email.py --help`
 
 
-## Data Download
+##Download Client
+To get a copy of whatever the latest model out put is use this option.
+
+`zodiac-output `
+
+## Output Download
 
 In a python application import
-`api.Zodiac`
+`python zodiac-output.py -u USERNAME -p PASSWORD -c COMPANY_MASK`
+
+**Notes:**
+This only downloads the latest model output for a company.  If you have multiple models
+you will want to use the more advanced facilities below.
+
+See example usages from the command line via:
+`python zodiac-output.py --help`
+
+
+## Download Multiple Files
 
 Instantiate the Zodiac class with your credentials (username, password).  On the instance call `list_datasets` to see your available files.
 
 To retrieve a file, get the download link by calling `get_download_url` providing the method with the filename.
 
-### Download example
 
 ```
 import requests
