@@ -40,26 +40,49 @@ class Zodiac(object):
         self.company = body['mask']
         self.session.headers.update({'User-Authorization-Token': 'Bearer ' + body['token']})
 
-    def _create_upload_location(self, filename):
+
+    def _create_upload(self, path, filename):
         url = self._format_url(
-            '{api}/{version}/{company}/datasets/upload_url',
+            path,
             company=self.company
         )
         body = self._post(url, {'filename':filename})
         return body['url']
 
 
+    def _create_record(self, path, filename, upload_url, description):
+        s3_path = urlparse(upload_url).path
+        url = self._format_url(path, company=self.company)
+        self._post(
+            url,
+            {'filename': filename, 's3_path': s3_path, 'description': description}
+        )
+        return s3_path
+
+    def _create_upload_location(self, filename):
+        return self._create_upload('{api}/{version}/{company}/datasets/upload_url', filename)
+
+
     def upload_file(self, filepath, description):
         filename = filepath.split('/')[-1]
         upload_url = self._create_upload_location(filename)
         self._put(upload_url, filepath, filename)
-        s3_path = urlparse(upload_url).path
-        url = self._format_url('{api}/{version}/{company}/datasets/create', company=self.company)
-        resp = self._post(
-            url,
-            {'description': description, 'filename': filename, 's3_path': s3_path}
+        return self._create_record(
+            '{api}/{version}/{company}/datasets/create', filename, upload_url, description
         )
-        return s3_path
+
+
+    def _create_email_upload_location(self, filename):
+        return self._create_upload('{api}/{vesion}/{company}/email/upload_url', filename)
+
+
+    def upload_emails(self, filepath):
+        filename = filepath.split('/')[-1]
+        upload_url = self._create_email_upload_location(filename)
+        self._put(upload_url, filepath, filename)
+        return self._create_record(
+            '{api}/{version}/{company}/email/create', filename, upload_url, ''
+        )
 
 
     def submit_job(self, args):
