@@ -6,6 +6,11 @@ A python client to connect to Zodiac for data services.
 Install Python dependencies with
 ` pip install -r requirements.txt`
 
+
+For all programmatic uploads if you have a private cloud please use
+`--api` to provide your API end point, usually matching the pattern `https://privateaccount.zodiacmetrics.com/api`
+
+
 ## Pilot Data Upload
 
 Upload files via:
@@ -32,6 +37,16 @@ See example usage from the command line via:
 
 `python zodiac-job.py --help`
 
+## Upload Emails
+
+For clients using emails, please use this option.
+
+Upload files via:
+ `zodiac-emails.py -u USERNAME -p PASSWORD -e EMAIL_FILE -a ATTRIBUTES_FILE -c COMPANY_MASK`
+
+See example usage from the command line via:
+
+`python zodiac-job.py --help`
 **Notes:**
 
 1. Transaction logs are considered append-only and the job processor will keep only new transactions since the last job run.
