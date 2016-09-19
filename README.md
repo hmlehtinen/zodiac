@@ -6,6 +6,11 @@ A python client to connect to Zodiac for data services.
 Install Python dependencies with
 ` pip install -r requirements.txt`
 
+
+For all programmatic uploads if you have a private cloud please use
+`--api` to provide your API end point, usually matching the pattern `https://privateaccount.zodiacmetrics.com/api`
+
+
 ## Pilot Data Upload
 
 Upload files via:
@@ -41,18 +46,44 @@ See example usage from the command line via:
 
 1. Transaction log and attribute headers are expected to conform to those provided in the initial client onboarding. If you'd like to have the schemas updated, please contact your client success representative.
 
+## Upload Emails
+
+For clients using emails, please use this option.
+
+Upload files via:
+ `zodiac-emails.py -u USERNAME -p PASSWORD -e EMAIL_FILE -a ATTRIBUTES_FILE -c COMPANY_MASK`
+
+See example usage from the command line via:
+
+`python zodiac-email.py --help`
+
+
+##Download Client
+To get a copy of whatever the latest model out put is use this option.
+
+`zodiac-output `
+
+## Output Download
+
 1. All transaction log data must be complete. Rows with missing data are excluded.
 
-## Data Download
-
 In a python application import
-`api.Zodiac`
+`python zodiac-output.py -u USERNAME -p PASSWORD -c COMPANY_MASK`
+
+**Notes:**
+This only downloads the latest model output for a company.  If you have multiple models
+you will want to use the more advanced facilities below.
+
+See example usages from the command line via:
+`python zodiac-output.py --help`
+
+
+## Download Multiple Files
 
 Instantiate the Zodiac class with your credentials (username, password).  On the instance call `list_datasets` to see your available files.
 
 To retrieve a file, get the download link by calling `get_download_url` providing the method with the filename.
 
-### Download example
 
 ```
 import requests
