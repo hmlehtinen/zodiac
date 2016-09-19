@@ -23,7 +23,7 @@ See example usage from the command line via:
 
 ## Data Upload for Job Run
 
-For clients using continuous programmatic upload, please use this option.
+For clients using continuous programmatic upload, please use this option. Before beginning, talk to your client success representative to set up data schemas.
 
 Upload files via:
  `zodiac-job.py -m HASH_PROVIDED_BY_ZODIAC -u USERNAME -p PASSWORD -t TRANSACTION_LOG_FILE -a ATTRIBUTES_FILE`
@@ -40,6 +40,8 @@ See example usage from the command line via:
 
 
 1. Transaction log and attribute headers are expected to conform to those provided in the initial client onboarding. If you'd like to have the schemas updated, please contact your client success representative.
+
+1. All transaction log data must be complete. Rows with missing data are excluded.
 
 ## Data Download
 
