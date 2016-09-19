@@ -1,0 +1,22 @@
+---
+engines:
+  duplication:
+    enabled: true
+    exclude_fingerprints:
+    - 4a5c03aedfd3bba853d3cfc582196e43
+    config:
+      languages:
+      - javascript
+      - python
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+    config:
+      python_version: 2
+  pep8:
+    enabled: true
+ratings:
+  paths:
+  - "**.module"
+  - "**.py"
