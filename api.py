@@ -117,14 +117,18 @@ class Zodiac(object):
             company=self.company,
             mgh=mgh
         )
-        filename = json.loads(self._get(url).text)['filename']
+        api_text = self._get(url).text
+
+        filename = json.loads(api_text)['id']
         resp = self._get(
             self._format_url(
                 "{api}/{version}/{company}/datasets/{inst}/download_url",
                 company=self.company,
                 inst=filename)
         )
-        return json.loads(resp.text)['url']
+        download = json.loads(resp.text)['url']
+        print "Download url %s" % download
+        return download
 
 
     def get_download_url(self, filename):
