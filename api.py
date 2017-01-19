@@ -1,6 +1,7 @@
 import json
 import requests
 from urlparse import urlparse
+import logging
 
 class Zodiac(object):
 
@@ -18,6 +19,9 @@ class Zodiac(object):
         return url.format(**kwargs)
 
     def _post(self, url, values):
+        headers = {
+            "Content-Type": "application/json"
+        }
         resp = self.session.post(url, json=values)
         return json.loads(resp.text)
 
