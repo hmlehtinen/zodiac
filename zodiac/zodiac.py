@@ -12,3 +12,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     client = api.Zodiac(args.username, args.password, api=args.api)
     client.upload_file(args.filepath, args.description)
+    
