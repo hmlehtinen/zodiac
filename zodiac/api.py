@@ -1,4 +1,5 @@
 import json
+import os
 import requests
 from urlparse import urlparse
 import logging
@@ -69,6 +70,8 @@ class Zodiac(object):
 
     def upload_file(self, filepath, description):
         filename = filepath.split('/')[-1]
+        if os.name() == 'nt':
+            filename = filepath.split('\\')[-1]
         upload_url = self._create_upload_location(filename)
         self._put(upload_url, filepath, filename)
         return self._create_record(
