@@ -24,7 +24,11 @@ class Zodiac(object):
             "Content-Type": "application/json"
         }
         resp = self.session.post(url, json=values)
-        return json.loads(resp.text)
+        try:
+            return json.loads(resp.text)
+        except e:
+            print resp.text
+            raise e
 
     def _put(self, url, filepath, filename):
         headers = {
