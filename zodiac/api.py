@@ -26,7 +26,7 @@ class Zodiac(object):
         resp = self.session.post(url, json=values)
         try:
             return json.loads(resp.text)
-        except e:
+        except Exception e:
             print resp.text
             raise e
 
