@@ -84,7 +84,7 @@ class Zodiac(object):
 
 
     def _create_email_upload_location(self, filename):
-        return self._create_upload('{api}/{vesion}/{company}/email/upload_url', filename)
+        return self._create_upload('{api}/{version}/{company}/email/upload_url', filename)
 
 
     def upload_emails(self, filepath):
