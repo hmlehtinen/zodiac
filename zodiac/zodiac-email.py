@@ -1,4 +1,5 @@
 import argparse
+import api
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Upload email addresses for use in Zodiac')
